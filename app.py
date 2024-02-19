@@ -85,6 +85,7 @@ def check():
         print(val)
         keys = read()
         if val in keys:
+            delete(val)
             return jsonify({"success": True})
         else:
             return jsonify({"success": False})
