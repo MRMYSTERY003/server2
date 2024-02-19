@@ -2,6 +2,9 @@ from flask import Flask, request, jsonify
 import requests
 import ast
 import os
+from flask_cors import CORS
+
+
 
 
 URL = os.environ.get('URL')
@@ -9,6 +12,7 @@ URL = os.environ.get('URL')
 
 
 app = Flask(__name__)
+CORS(app, origins=['https://codehub003.github.io','http://localhost', 'https://localhost'])
 i = 1
 
 
