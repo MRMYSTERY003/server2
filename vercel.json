@@ -3,7 +3,7 @@
     "builds": [
         {
             "src": "*.py",
-            "use": "@MRMYSTERY003/server2"
+            "use": "@vercel/python"
             
         }
     ],
