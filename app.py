@@ -81,6 +81,20 @@ def delete_data():
         print(e)
         return jsonify({"success": False, "message": f"Error: {str(e)}"})
 
+@app.route("/check", methods=["GET", "POST", "PUT"])
+def check():
+    try:
+        val = int(request.args['val'])
+        print(val)
+        keys = read()
+        if val in keys:
+            return jsonify({"success": True})
+        else:
+            return jsonify({"success": False})
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False, "message": f"Error: {str(e)}"})
+
 
 
 
