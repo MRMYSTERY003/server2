@@ -46,7 +46,7 @@ def home():
     return "ready to go!"
 
 
-@app.route("/write0", methods=["GET", "POST", "PUT"])
+@app.route("/write", methods=["GET", "POST", "PUT"])
 def write_data():
     try:
         val = int(request.args['val'])
@@ -58,7 +58,7 @@ def write_data():
         return jsonify({"success": False, "message": f"Error: {str(e)}"})
 
 
-@app.route("/read0", methods=["GET", "POST", "PUT"])
+@app.route("/read", methods=["GET", "POST", "PUT"])
 def read_data():
     try:
         return read()
@@ -68,7 +68,7 @@ def read_data():
 
 
 
-@app.route("/delete0", methods=["GET", "POST", "PUT"])
+@app.route("/delete", methods=["GET", "POST", "PUT"])
 def delete_data():
     try:
         val = int(request.args['val'])
