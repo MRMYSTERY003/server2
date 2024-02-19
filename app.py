@@ -1,7 +1,10 @@
 from flask import Flask, request, jsonify
 import requests
 import ast
+import os
 
+
+URL = os.environ.get('URL')
 
 
 
@@ -9,23 +12,17 @@ app = Flask(__name__)
 i = 1
 
 
-def vals(data = None, mode = 'read'):
-
-    url = "https://sketchpy-95aa4-default-rtdb.firebaseio.com/keys.json"
-    keys = requests.put(url,json=data).text
-    print(keys)
-
 
 
 def read():
-    url = "https://sketchpy-95aa4-default-rtdb.firebaseio.com/keys.json"
+    url =URL
     keys = requests.get(url).text
     result_list = ast.literal_eval(keys.replace(",null,", ""))
     return result_list
  
 
 def write(data):
-    url = "https://sketchpy-95aa4-default-rtdb.firebaseio.com/keys.json"
+    url =URL
     res = read()
 
     data = {len(res) : data}
@@ -35,7 +32,7 @@ def write(data):
 
 
 def delete(data):
-    url = f"https://sketchpy-95aa4-default-rtdb.firebaseio.com/keys.json"
+    url = URL
     li = read()
 
     if data not in li:
@@ -49,7 +46,7 @@ def home():
     return "ready to go!"
 
 
-@app.route("/write", methods=["GET", "POST", "PUT"])
+@app.route("/write0", methods=["GET", "POST", "PUT"])
 def write_data():
     try:
         val = int(request.args['val'])
@@ -61,7 +58,7 @@ def write_data():
         return jsonify({"success": False, "message": f"Error: {str(e)}"})
 
 
-@app.route("/read", methods=["GET", "POST", "PUT"])
+@app.route("/read0", methods=["GET", "POST", "PUT"])
 def read_data():
     try:
         return read()
@@ -71,7 +68,7 @@ def read_data():
 
 
 
-@app.route("/delete", methods=["GET", "POST", "PUT"])
+@app.route("/delete0", methods=["GET", "POST", "PUT"])
 def delete_data():
     try:
         val = int(request.args['val'])
@@ -96,15 +93,10 @@ def check():
         return jsonify({"success": False, "message": f"Error: {str(e)}"})
 
 
-
-
 if __name__ == "__main__":
-    # app.run(debug=True, host="0.0.0.0")
-    app.run(debug=False, host="0.0.0.0")
+    app.run(debug=True, host="0.0.0.0")
+    # app.run(debug=False, host="0.0.0.0")
 
-
-
-# vals(data=[2,3,5,63,4])
 
 
 
